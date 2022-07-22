@@ -89,36 +89,32 @@ public class ArrayProduct {
 
     public static void main(String[] args) {
 
-        // Option 1: With division  This is a O(N + N) solution, so it is a linear solution
         int[] arr = {1, 2, 3, 4, 5};
         long[] expected = {120, 60, 40, 30, 24};
         ArrayProduct arrayProduct = new ArrayProduct(arr); // O(N)
-        long[] actual = arrayProduct.productsExceptI_WithDivision(); // O(N)
-        boolean result = Objects.deepEquals(expected, actual);
-        System.out.println(result ? "PASS" : "FAIL");
 
         int[] arr1 = {3, 2, 1};
         long[] expected1 = {2, 3, 6};
         ArrayProduct arrayProduct1 = new ArrayProduct(arr1); // O(N)
+
+
+        // Option 1: With division  This is a O(N + N) solution, so it is a linear solution
+        long[] actual = arrayProduct.productsExceptI_WithDivision(); // O(N)
+        boolean result = Objects.deepEquals(expected, actual);
+        System.out.println(result ? "PASS" : "FAIL");
+
         long[] actual1 = arrayProduct1.productsExceptI_WithDivision(); // O(N)
         boolean result1 = Objects.deepEquals(expected1, actual1);
         System.out.println(result1 ? "PASS" : "FAIL");
 
 
-
         // Option 2: Without division  This is a O(N x N) solution, so it is a quadratic solution
-        int[] arr3 = {1, 2, 3, 4, 5};
-        long[] expected3 = {120, 60, 40, 30, 24};
-        ArrayProduct arrayProduct3 = new ArrayProduct(arr3); // O(N)
-        long[] actual3 = arrayProduct3.productsExceptI_WithoutDivision(); // O(N)
-        boolean result3 = Objects.deepEquals(expected3, actual3);
+        long[] actual3 = arrayProduct.productsExceptI_WithoutDivision(); // O(N)
+        boolean result3 = Objects.deepEquals(expected, actual3);
         System.out.println(result3 ? "PASS" : "FAIL");
 
-        int[] arr4 = {3, 2, 1};
-        long[] expected4 = {2, 3, 6};
-        ArrayProduct arrayProduct4 = new ArrayProduct(arr4); // O(N)
-        long[] actual4 = arrayProduct4.productsExceptI_WithoutDivision(); // O(N)
-        boolean result4 = Objects.deepEquals(expected4, actual4);
+        long[] actual4 = arrayProduct1.productsExceptI_WithoutDivision(); // O(N)
+        boolean result4 = Objects.deepEquals(expected1, actual4);
         System.out.println(result4 ? "PASS" : "FAIL");
 
         // Option 3: Is there a solution without division better than O(N^2)? 
