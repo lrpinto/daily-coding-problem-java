@@ -120,8 +120,9 @@ public class ArrayProduct {
         long[] actual4 = arrayProduct4.productsExceptI_WithoutDivision(); // O(N)
         boolean result4 = Objects.deepEquals(expected4, actual4);
         System.out.println(result4 ? "PASS" : "FAIL");
-    }
 
-    // Option 3: Is there a solution without division better than O(N^2)? 
+        // Option 3: Is there a solution without division better than O(N^2)? 
+
+    }
     
 }
