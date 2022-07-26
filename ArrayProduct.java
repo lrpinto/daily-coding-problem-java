@@ -70,9 +70,9 @@ public class ArrayProduct {
 
     /**
      * This method is Time = O(NxN) as it performs N x N iterations, where N is the size of the array
-     * @return the product of all elements in the array
+     * @return the product of all elements in the array except element i
      */
-    public long[] productsExceptI_WithoutDivision() {
+    public long[] productsExceptI_WithoutDivision_ONN() {
         if (this.arr == null) return null;
         long[] productsExceptI = new long[arr.length];
         for (int i = 0; i < arr.length; i++) {
@@ -84,6 +84,30 @@ public class ArrayProduct {
             }
             productsExceptI[i] = productForI;
         }
+        return productsExceptI;
+    }
+
+    /**
+     * This method is Time = O(N+N) as it performs N + N iterations, where N is the size of the array, so it is a linear solution
+     * @return the product of all elements in the array except element i
+     */
+    public long[] productsExceptI_WithoutDivision_O2N() {
+        if (this.arr == null) return null;
+        long[] productsExceptI = new long[arr.length];
+
+        // First pass (left to right): calculate products of a before a[i]
+        productsExceptI[0] = 1;
+        for (int i = 1; i < arr.length; i++) {
+            productsExceptI[i] = productsExceptI[i-1] * this.arr[i-1];
+        }
+
+        // Second pass: (right to left): multiply the already set product of a before a[i] by products of a after a[i] 
+        long productAfter = 1;
+        for (int j = (productsExceptI.length - 2); j >= 0; j--) {
+            productAfter *= this.arr[j+1];
+            productsExceptI[j] *= productAfter;
+        }
+
         return productsExceptI;
     }
 
@@ -109,15 +133,22 @@ public class ArrayProduct {
 
 
         // Option 2: Without division  This is a O(N x N) solution, so it is a quadratic solution
-        long[] actual3 = arrayProduct.productsExceptI_WithoutDivision(); // O(N)
+        long[] actual3 = arrayProduct.productsExceptI_WithoutDivision_ONN(); // O(N^2)
         boolean result3 = Objects.deepEquals(expected, actual3);
         System.out.println(result3 ? "PASS" : "FAIL");
 
-        long[] actual4 = arrayProduct1.productsExceptI_WithoutDivision(); // O(N)
+        long[] actual4 = arrayProduct1.productsExceptI_WithoutDivision_ONN(); // O(N^2)
         boolean result4 = Objects.deepEquals(expected1, actual4);
         System.out.println(result4 ? "PASS" : "FAIL");
 
         // Option 3: Is there a solution without division better than O(N^2)? 
+        long[] actual5 = arrayProduct.productsExceptI_WithoutDivision_O2N(); // O(2N)
+        boolean result5 = Objects.deepEquals(expected, actual5);
+        System.out.println(result5 ? "PASS" : "FAIL");
+
+        long[] actual6 = arrayProduct1.productsExceptI_WithoutDivision_O2N(); // O(2N)
+        boolean result6 = Objects.deepEquals(expected1, actual6);
+        System.out.println(result6 ? "PASS" : "FAIL");
 
     }
     
